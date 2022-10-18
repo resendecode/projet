@@ -1,0 +1,20 @@
+{
+  "name": "betterfood",
+  "version": "1.0.0",
+  "description": "projet",
+  "main": "index.js",
+  "scripts": {
+    "construction": "tsc",
+    "configuration": "tsc --showConfig"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joniboy74prog/projet.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joniboy74prog/projet/issues"
+  },
+  "homepage": "https://github.com/joniboy74prog/projet#readme"
+}
