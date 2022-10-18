@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/joniboy74prog/projet/issues"
   },
-  "homepage": "https://github.com/joniboy74prog/projet#readme"
+  "homepage": "https://github.com/joniboy74prog/projet#readme",
+  "dependencies": {
+    "quagga": "^0.12.1"
+  }
 }
