@@ -4,16 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Better Food</title>
+    <script src="node_modules/quagga/dist/quagga.js"></script>
     <script src="./js/Index.js" type="module"></script>
-    <script src="./js/WebRTC.js" type="module"></script>
     <script src="./js/Barcode.js" type="module"></script>
+    <style>
+        /* In order to place the tracking correctly */
+        canvas.drawing, canvas.drawingBuffer {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
 </head>
 
 <body>
     <div><h1>Better Food</h1></div>
-    <div class="Webcam">
-        <video id="Video" width="500" height="400" autoplay></video>
+    <div id="scanner-container">
+        <video autoplay="true" preload="auto" id="vid"></video>
     </div>
+    <button id="Startv">Start Webcam</button> Or 
+    <input type="file" accept="image/*"/>
+
+</br>
 </body>
 
 </html>

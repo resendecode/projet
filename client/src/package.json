@@ -2,7 +2,7 @@
   "name": "betterfood",
   "version": "1.0.0",
   "description": "projet",
-  "main": "index.js",
+  "main": "js/Index.js",
   "scripts": {
     "construction": "tsc",
     "configuration": "tsc --showConfig"
@@ -19,5 +19,8 @@
   "homepage": "https://github.com/joniboy74prog/projet#readme",
   "dependencies": {
     "quagga": "^0.12.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.3"
   }
 }
