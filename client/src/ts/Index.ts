@@ -3,11 +3,12 @@ import Barcode from "./Barcode.js";
 let start  = <HTMLButtonElement> document.querySelector("#Startv");
 let video = <HTMLVideoElement> document.querySelector("#scanner-container");
 let Reader : Barcode = new Barcode();
-let ws = new WebSocket("ws://localhost:8025");
+let ws = new WebSocket("ws://localhost:8025/websocket");
 
-ws.addEventListener('open', (event) => {
-    ws.send('Hello Server!');
-});
+ws.onopen = function(e) {
+    alert("[open] Connection established");
+    alert("Sending to server");
+  };
 
 // Listen for messages
 ws.addEventListener('message', (event) => {

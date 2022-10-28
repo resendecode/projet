@@ -3,9 +3,10 @@ let start = document.querySelector("#Startv");
 let video = document.querySelector("#scanner-container");
 let Reader = new Barcode();
 let ws = new WebSocket("ws://localhost:8025");
-ws.addEventListener('open', (event) => {
-    ws.send('Hello Server!');
-});
+ws.onopen = function (e) {
+    alert("[open] Connection established");
+    alert("Sending to server");
+};
 // Listen for messages
 ws.addEventListener('message', (event) => {
     console.log('Message from server ', event.data);
