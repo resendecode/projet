@@ -6,10 +6,6 @@
 package com.mycompany.websocket;
 import org.glassfish.tyrus.server.Server;
 
-/**
- *
- * @author mickael
- */
 public class Websocket {
     
     @javax.websocket.server.ServerEndpoint(value = "/websocket")
@@ -38,12 +34,17 @@ public class Websocket {
 
     public static void main(String[] args) {
         Server server;
+        String url = "client" + java.io.File.separatorChar + "src" + java.io.File.separatorChar + "index.html";
         server = new Server ("localhost", 8025, "/websocket", null, EndPoint.class);
         try {
             server.start();
             System.out.println("--- server is running");
             System.out.println(java.nio.file.FileSystems.getDefault().getPath("client") );
-            java.awt.Desktop.getDesktop().browse(java.nio.file.FileSystems.getDefault().getPath("client" + java.io.File.separatorChar + "src" + java.io.File.separatorChar + "index.html").toUri());
+
+            if (Runtime.getRuntime().exec(new String[] { "which", "xdg-open" }).getInputStream().read() != -1) {
+                Runtime.getRuntime().exec(new String[] { "xdg-open", url });
+            }
+            else java.awt.Desktop.getDesktop().browse(java.nio.file.FileSystems.getDefault().getPath("client" + java.io.File.separatorChar + "src" + java.io.File.separatorChar + "index.html").toUri());
             System.out.print("Please press a key to stop the server.");
             java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
             reader.readLine();
