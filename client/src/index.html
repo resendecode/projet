@@ -7,25 +7,28 @@
     <script src="node_modules/quagga/dist/quagga.js"></script>
     <script src="./js/Index.js" type="module"></script>
     <script src="./js/Barcode.js" type="module"></script>
-    <style>
-        /* In order to place the tracking correctly */
-        canvas.drawing, canvas.drawingBuffer {
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="./style.css" charset="utf-8" media="screen" />
 </head>
 
 <body>
-    <div><h1>Better Food</h1></div>
-    <div id="scanner-container">
-        <video autoplay="true" preload="auto" id="vid"></video>
+    
+    <header>
+        <h1>Better Food</h1><br/>
+        
+    </header>
+    <div class="scan">
+        <div id="scanner-container"> <video autoplay="true" preload="auto" id="vid"></video></div>
+        <button id="Startv" value="Start Webcam">Start Webcam</button> ou
+        <input type="file" accept="image/*"/> <br/>sinon entrer le code bar
+        <input type="text" id="textbox"/>
+        <input type="submit" id="Submit" value="Envoyer"/>
     </div>
-    <button id="Startv">Start Webcam</button> Or 
-    <input type="file" accept="image/*"/>
-
-</br>
+    <div class="result">
+        <h1>Résultat</h1>
+    </div>
+    <footer>
+        informations
+    </footer>
 </body>
 
 </html>
