@@ -42,6 +42,8 @@ public class Websocket {
         try {
             server.start();
             System.out.println("--- server is running");
+            System.out.println(java.nio.file.FileSystems.getDefault().getPath("client") );
+            java.awt.Desktop.getDesktop().browse(java.nio.file.FileSystems.getDefault().getPath("client" + java.io.File.separatorChar + "src" + java.io.File.separatorChar + "index.html").toUri());
             System.out.print("Please press a key to stop the server.");
             java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
             reader.readLine();

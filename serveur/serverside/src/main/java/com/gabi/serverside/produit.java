@@ -141,16 +141,12 @@ public class produit {
 		}	
 	}
 
-	
-	
-
-
 
 	public void print()throws IOException{
 		string_json = constructeur_objet.build().toString();
 		System.out.print(string_json);
 
-		FileWriter file = new FileWriter("/home/gabriel/Documents/coursfac/L3/s5/projet/serveur/serverside/src/main/java/com/gabi/serverside/json/jsonfinal.json");
+		FileWriter file = new FileWriter("serveur/serverside/src/main/java/com/gabi/serverside/json/jsonfinal.json");
 		file.write(string_json);
 		file.close();
 	}
