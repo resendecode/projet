@@ -1,0 +1,35 @@
+/* In order to place the tracking correctly */
+canvas.drawing, canvas.drawingBuffer {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+
+html, body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+header {
+    background-color: #8458B3;
+    color: white;
+    flex: 1;
+}
+
+.scan {
+    background-color: #494d5f;
+    flex: 1;
+}
+
+.result {
+    background-color: #8458B3;
+    color: white;
+    flex: 1;
+}
+
+footer {
+    background-color: #494d5f;
+    flex: 1;
+}
