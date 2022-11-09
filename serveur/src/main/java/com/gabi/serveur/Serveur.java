@@ -3,10 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
  */
 
-package com.mycompany.websocket;
+package com.gabi.serveur;
+import java.net.MalformedURLException;
+import java.io.IOException;
 import org.glassfish.tyrus.server.Server;
 
-public class Websocket {
+/**
+ *
+ * @author gabriel
+ */
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
+ */
+
+
+public class Serveur {
 
 
     @javax.websocket.server.ServerEndpoint(value = "/websocket")
@@ -25,6 +38,15 @@ public class Websocket {
         public void onMessage(javax.websocket.Session session, String message) {
             System.out.println("Message from client: " + message);
 
+            //Creation du produit avec le message du client
+            try {
+                ProduitApi produit = new ProduitApi(message);
+                produit.print();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
         }
 
         @javax.websocket.OnOpen
@@ -39,7 +61,6 @@ public class Websocket {
         //System.setProperty("http.proxyPort", "1963");
         Server server;
         server = new Server ("localhost", 8025, "/BetterFood", null, EndPoint.class);
-         
         try {
             server.start();
             System.out.println("--- server is running");
@@ -54,3 +75,4 @@ public class Websocket {
         }
     }
 }
+
