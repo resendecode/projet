@@ -7,7 +7,7 @@ let ws = new WebSocket("ws://localhost:8025/BetterFood/websocket");
 ws.onopen = function(e) {
     alert("[open] Connection established");
     alert("Sending to server");
-    ws.send("5411188103387");
+    //ws.send("5411188103387");
 
 
     setTimeout(function(){

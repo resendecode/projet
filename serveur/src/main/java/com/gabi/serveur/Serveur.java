@@ -41,7 +41,7 @@ public class Serveur {
             //Creation du produit avec le message du client
             try {
                 ProduitApi produit = new ProduitApi(message);
-                produit.print();
+                session.getBasicRemote().sendText(produit.print());
             } catch (Exception e) {
                 e.printStackTrace();
             }
