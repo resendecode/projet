@@ -1,7 +1,11 @@
-declare var Quagga : any; // On initialise Quagga pour éviter les erreurs
+// Importation du fichier Websocket permettant d'envoyer les informations vers le côté Java
+import { ws } from "./Websocket.js"
+// On initialise la librairie Quagga cf. Librarie Quagga
+declare var Quagga : any; 
 
 export default class Barcode {
 
+    // Lecture par la Webcam
     live(video : HTMLVideoElement) {
         Quagga.init({
             inputStream : {
@@ -12,15 +16,7 @@ export default class Barcode {
             },
             decoder : {
                 readers: [
-                    "code_128_reader",
                     "ean_reader",
-                    "ean_8_reader",
-                    "code_39_reader",
-                    "code_39_vin_reader",
-                    "codabar_reader",
-                    "upc_reader",
-                    "upc_e_reader",
-                    "i2of5_reader"
                   ],
             }
         }, function(err : Error) {
@@ -34,26 +30,17 @@ export default class Barcode {
         Quagga.onDetected(function (result : any) {
             Quagga.stop();
             console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
+            // Envoie le résultat au Websocket
+            ws.send(result);
         });
     }
 
-    stop() {
-        Quagga.stop();
-    }
-
+    // Lecture par image static
     static(img : Object) {
         Quagga.decodeSingle({
             decoder: {
                 readers: [
-                    "code_128_reader",
                     "ean_reader",
-                    "ean_8_reader",
-                    "code_39_reader",
-                    "code_39_vin_reader",
-                    "codabar_reader",
-                    "upc_reader",
-                    "upc_e_reader",
-                    "i2of5_reader"
                   ], // List of active readers
             },
             locate: true, // try to locate the barcode in the image
@@ -61,10 +48,18 @@ export default class Barcode {
         }, function(result : any){
             if(result.codeResult) {
                 console.log("result", result.codeResult.code);
+                ws.send(result);
             } else {
-                console.log("not detected");
+                alert("non détecté");
             }
         });
         
+    }
+
+    // Lecture par input
+    input(value : string) {
+        // Le code barre doit être composé de numéro avec une taille de 13
+        let regex = new RegExp("^[0-9]{13}$");
+        regex.test(value) ? ws.send(value) : alert("mauvais format");
     }
 }

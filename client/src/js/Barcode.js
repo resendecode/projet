@@ -1,3 +1,4 @@
+import { ws } from "./Websocket.js";
 export default class Barcode {
     live(video) {
         Quagga.init({
@@ -31,10 +32,8 @@ export default class Barcode {
         Quagga.onDetected(function (result) {
             Quagga.stop();
             console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
+            ws.send(result);
         });
-    }
-    stop() {
-        Quagga.stop();
     }
     static(img) {
         Quagga.decodeSingle({
@@ -56,11 +55,16 @@ export default class Barcode {
         }, function (result) {
             if (result.codeResult) {
                 console.log("result", result.codeResult.code);
+                ws.send(result);
             }
             else {
-                console.log("not detected");
+                alert("non détecté");
             }
         });
+    }
+    input(value) {
+        let regex = new RegExp("^[0-9]{13}$");
+        regex.test(value) ? ws.send(value) : alert("mauvais format");
     }
 }
 //# sourceMappingURL=Barcode.js.map
