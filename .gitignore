@@ -1,1 +1,5 @@
-/Websocket/target/
+/serveur/.idea/
+/.fleet/
+/.idea/
+/.vscode/
+/serveur/target

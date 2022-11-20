@@ -152,9 +152,10 @@ public class ProduitApi {
 		string_json = constructeur_objet.build().toString();
 		System.out.print(string_json);
 
-		FileWriter file = new FileWriter("serveur/src/main/java/com/gabi/serveur/json/final.json");
-		file.write(string_json);
-		file.close();
+		//FileWriter file = new FileWriter("serveur/src/main/java/com/gabi/serveur/json/final.json");
+        //serveur/src/main/java/com/gabi/serveur/json/final.json
+        //file.write(string_json);
+		//file.close();
 		return string_json;
 	}
 
