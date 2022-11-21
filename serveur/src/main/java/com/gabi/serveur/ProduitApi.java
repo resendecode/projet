@@ -15,28 +15,20 @@ public class ProduitApi {
 	private java.lang.String barcode;
 	final private java.net.URL url;
 	private java.net.URLConnection connection;
-
-
-	//le constructeur de l'objet json
 	JsonObjectBuilder constructeur_objet = Json.createObjectBuilder();
-	//la chaine de char où les informations seront mises.
 	String string_json; 
-
-
 
 	ProduitApi(java.lang.String barcode)throws Exception, MalformedURLException, IOException { //nécessaire de mettre le "throws " pour ne pas avoir d'erreur sur url
 		this.barcode = barcode;
 		this.url = new java.net.URL("http://world.openfoodfacts.org/api/v0/product/" + this.barcode + ".json");	
-		this.connection =  url.openConnection();	
+		this.connection =  url.openConnection();
+			
 		if (connection != null) {
 		parseJson();
 		}
 		else{
 			throw new Exception("erreur de connection");
 		}
-
-
-
 	}
 	public void parseJson() throws IOException{
 			//La connection établie fournit un fichier que nous mettons dans une stream 'response'
@@ -90,6 +82,9 @@ public class ProduitApi {
 //On doit donc rentrer dans l'objet de la valeur pour chercher plus en détail jusqu'à trouver
 //l'url de l'image dans la bonne resolution
 
+//puisque l'arborescence de l'objet valeur se repete pour plusieures valeures parent
+//exemple : "...display/fr/img"  et "...display/eng/img"
+//il est nécessaire de 'break' le cycle à chaque 'if' pour ne pas retomber sur la mauvaise balise
 
 							key = parser.getString();
 							parser.next();
@@ -136,9 +131,10 @@ public class ProduitApi {
 
 			
 	}
+	//Cette méthode converti juste l'objet qu'on a obtenu dans 'parseDocument()' vers une string pour qu'elle puisse
+	//être envoyée ensuite par le serveur ws
 	public String build()throws IOException{
 		string_json = constructeur_objet.build().toString();
-		System.out.print(string_json);
 		return string_json;
 	}
 
