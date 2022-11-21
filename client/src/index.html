@@ -12,9 +12,8 @@
 </head>
 
 <body>
-    
+    <h1>Better Food</h1><br/>
     <header>
-        <h1>Better Food</h1><br/>
         Better Food est un projet écrit en TypeScript (client) et Java (serveur), ayant pour but de capturer un code barre EAN. <br/>
         Le code barre va alors être envoyé à l'aide d'un Websocket vers la partie Java. <br/>
         La partie Java va alors récuperer les informations alimentaires depuis <a href="https://fr.openfoodfacts.org/">OpenFoodFact</a> pour les afficher ensuite ici. <br/>
@@ -23,20 +22,20 @@
         - <a href="https://eclipse-ee4j.github.io/tyrus/">Tyrus</a> pour la mise en place du Websocket <br/>
         - <a href="https://mvnrepository.com/artifact/org.glassfish/javax.json">Javax.json</a> pour le traitement des donneés dans un fichier JSON
     </header>
+    <h1>Scan</h1>
     <div class="scan">
-        <h1>Scan</h1>
         <div id="scanner-container"> <video autoplay="true" preload="auto" id="vid"></video></div>
         <button id="Startv" value="Start Webcam">Start Webcam</button> ou
         <input type="file" accept="image/*"/> <br/>sinon entrer le code bar
         <input type="number" id="number"/>
         <input type="submit" id="submit" value="Envoyer"/><div id="reg"></div>
     </div>
+    <h1>Résultat</h1>
     <div class="result">
-        <h1>Résultat</h1>
         <div id="parse"></div>
     </div>
+    <h1>informations</h1>
     <footer>
-        <h1>informations</h1>
         <a href="https://github.com/joniboy74prog/projet">Github</a>
     </footer>
 </body>

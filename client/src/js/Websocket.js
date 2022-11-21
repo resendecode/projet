@@ -13,20 +13,21 @@ ws.onmessage = function (event) {
     let json = JSON.parse(event.data);
     let result = document.getElementById("parse");
     console.log(json);
+    // Affichage
     result.innerHTML =
         `<img src="${json.img}">
+    <div class='ptext'>
     <h2>${json.nom}</h2> <br/>
     marque : ${json.marque} <br/>
     catégorie : ${json.catégories} <br/>
     nutriscore : ${json.nutriscore} <br/>
     quantité : ${json.qte} <br/>
     ingrédients : ${json.ingredients} <br/>
-    <div class='nutr'>valeurs nutritionnelles : <br/> 
     <table>
   <tr>
     <th>Tableau nutritionnel</th>
     <th>Pour 100g</th>
-    <th>Par portion (${json.qte}</th>
+    <th>Par portion (${json.qte})</th>
   </tr>
   <tr>
     <td>Energie</td>
