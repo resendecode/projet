@@ -123,18 +123,13 @@ public class ProduitApi {
 							parser.next();
 							constructeur_objet.add("categories", parser.getValue());
 							break;
-
 						case "ingredients_text_fr":
 							parser.next();
 							constructeur_objet.add("ingredients", parser.getValue());
 							break;
-						case "ingredients_text_with_allergens_fr":
-							parser.next();
-							constructeur_objet.add("allergènes", parser.getValue());
-							break;
 						case "nutriments":
 							parser.next();
-							constructeur_objet.add("valeures nutritionelles", parser.getValue());
+							constructeur_objet.add("nutriment", parser.getValue());
 							break;
 						}
 					

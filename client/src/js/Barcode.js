@@ -1,5 +1,7 @@
+// Importation du fichier Websocket permettant d'envoyer les informations vers le côté Java
 import { ws } from "./Websocket.js";
 export default class Barcode {
+    // Lecture par la Webcam
     live(video) {
         Quagga.init({
             inputStream: {
@@ -10,15 +12,7 @@ export default class Barcode {
             },
             decoder: {
                 readers: [
-                    "code_128_reader",
                     "ean_reader",
-                    "ean_8_reader",
-                    "code_39_reader",
-                    "code_39_vin_reader",
-                    "codabar_reader",
-                    "upc_reader",
-                    "upc_e_reader",
-                    "i2of5_reader"
                 ],
             }
         }, function (err) {
@@ -32,22 +26,16 @@ export default class Barcode {
         Quagga.onDetected(function (result) {
             Quagga.stop();
             console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
+            // Envoie le résultat au Websocket
             ws.send(result);
         });
     }
+    // Lecture par image static
     static(img) {
         Quagga.decodeSingle({
             decoder: {
                 readers: [
-                    "code_128_reader",
                     "ean_reader",
-                    "ean_8_reader",
-                    "code_39_reader",
-                    "code_39_vin_reader",
-                    "codabar_reader",
-                    "upc_reader",
-                    "upc_e_reader",
-                    "i2of5_reader"
                 ], // List of active readers
             },
             locate: true,
@@ -62,7 +50,9 @@ export default class Barcode {
             }
         });
     }
+    // Lecture par input
     input(value) {
+        // Le code barre doit être composé de numéro avec une taille de 13
         let regex = new RegExp("^[0-9]{13}$");
         regex.test(value) ? ws.send(value) : alert("mauvais format");
     }
