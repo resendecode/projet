@@ -71,5 +71,6 @@ ws.onmessage = function (event) {
   </tr>
 </table>
     </div>`;
+    document.getElementById('parse').scrollIntoView({ block: 'center', behavior: 'smooth' });
 };
 //# sourceMappingURL=Websocket.js.map

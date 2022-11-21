@@ -75,4 +75,6 @@ ws.onmessage = function(event) {
   </tr>
 </table>
     </div>`;
+    //Scroll la page vers le résultat
+    document.getElementById('parse')!.scrollIntoView({ block: 'center',  behavior: 'smooth' });
 };
