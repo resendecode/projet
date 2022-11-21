@@ -13,10 +13,11 @@
 
 <body>
     <h1>Better Food</h1><br/>
+    <h1>Introduction</h1>
     <header>
         Better Food est un projet écrit en TypeScript (client) et Java (serveur), ayant pour but de capturer un code barre EAN. <br/>
         Le code barre va alors être envoyé à l'aide d'un Websocket vers la partie Java. <br/>
-        La partie Java va alors récuperer les informations alimentaires depuis <a href="https://fr.openfoodfacts.org/">OpenFoodFact</a> pour les afficher ensuite ici. <br/>
+        La partie Java va alors récupérer les informations alimentaires depuis <a href="https://fr.openfoodfacts.org/">OpenFoodFact</a> pour les afficher ensuite ici. <br/>
         Pour cela nous utilisons le librairies suivantes : <br/>
         - <a href="https://serratus.github.io/quaggaJS/">QuaggaJs</a> pour la lecture d'un code barre <br/>
         - <a href="https://eclipse-ee4j.github.io/tyrus/">Tyrus</a> pour la mise en place du Websocket <br/>
@@ -25,8 +26,8 @@
     <h1>Scan</h1>
     <div class="scan">
         <div id="scanner-container"> <video autoplay="true" preload="auto" id="vid"></video></div>
-        <button id="Startv" value="Start Webcam">Start Webcam</button> ou
-        <input type="file" accept="image/*"/> <br/>sinon entrer le code bar
+        <button id="Startv" value="Start Webcam">Activer Webcam</button> ou
+        <input type="file" id="file" accept="image/*"/> <br/>sinon entrer le code bar
         <input type="number" id="number"/>
         <input type="submit" id="submit" value="Envoyer"/><div id="reg"></div>
     </div>

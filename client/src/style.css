@@ -23,18 +23,21 @@ canvas.drawing, canvas.drawingBuffer {
     padding: 1rem;
     background-color:#ffcc5c;
     max-width: 95%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
   }
 
   .scan {
     padding: 1rem;
     background-color: #ffcc5c;
     max-width: 95%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
   }
 
   footer {
     padding: 1rem;
     background-color: #ffcc5c;
     max-width: 95%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
   }
   
   h1, h2, h3 {
@@ -42,8 +45,14 @@ canvas.drawing, canvas.drawingBuffer {
     margin-bottom: 0.5rem;
   }
 
+  h1:first-of-type {
+    text-align: center;
+    text-decoration-line: underline;
+  }
+
   #parse {
     display: flex;
+    padding: 1rem;
     align-items: center;
     justify-content: flex-start;
     background-color: #ffcc5c;
@@ -60,8 +69,8 @@ canvas.drawing, canvas.drawingBuffer {
   }
 
   #parse table {
-    margin-bottom: 1rem;
-	width: 800px;
+  margin-bottom: 1rem;
+	width: 90%;
 	border-collapse: collapse;
 	overflow: hidden;
 	box-shadow: 0 0 20px rgba(0,0,0,0.1);
@@ -80,3 +89,4 @@ th {
 th {
 		background-color: #ffeead;
 }
+
