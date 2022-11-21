@@ -1,11 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
- */
 
 package com.gabi.serveur;
-import java.net.MalformedURLException;
-import java.io.IOException;
+
 import org.glassfish.tyrus.server.Server;
 
 /**
@@ -23,6 +18,8 @@ public class Serveur {
 
 
     @javax.websocket.server.ServerEndpoint(value = "/websocket")
+
+    
     public static class EndPoint {
     @javax.websocket.OnClose
         public void onClose(javax.websocket.Session session, javax.websocket.CloseReason close_reason) {
@@ -36,16 +33,19 @@ public class Serveur {
 
         @javax.websocket.OnMessage
         public void onMessage(javax.websocket.Session session, String message) {
+            //lorsqu'on reçoit un message du côté client de l'application (un barcode)
+            //nous essayons de créer un objet ProduitApi qui va traiter la requete
+            //la reponse au message sera une chaine de caracteres retourné par la methode 'build'
+            //avec toutes les informations necessaires au côté client pour construire la page de réponse
             System.out.println("Message from client: " + message);
 
-            //Creation du produit avec le message du client
+            //Creation du produit avec le code barre du client
             try {
                 ProduitApi produit = new ProduitApi(message);
-                session.getBasicRemote().sendText(produit.print());
+                session.getBasicRemote().sendText(produit.build());
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
 
         }
 
@@ -57,10 +57,8 @@ public class Serveur {
     }
 
     public static void main(String[] args) {
-        //System.setProperty("http.proxyHost", "cache.franckbarbier.com");
-        //System.setProperty("http.proxyPort", "1963");
-        Server server;
-        server = new Server ("localhost", 8025, "/BetterFood", null, EndPoint.class);
+        //Démarrage du serveur dans le port local
+        Server server = new Server ("localhost", 8025, "/BetterFood", null, EndPoint.class);
         try {
             server.start();
             System.out.println("--- server is running");

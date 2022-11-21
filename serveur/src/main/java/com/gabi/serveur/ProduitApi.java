@@ -1,25 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.gabi.serveur;
 
 /**
  *
  * @author gabriel
  */
-import java.net.MalformedURLException;
-import java.nio.file.Path;
 
+import java.net.MalformedURLException;
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
-import javax.json.stream.JsonParser.Event;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.StringReader;
-import java.math.BigDecimal;
+
 public class ProduitApi {
 	private java.lang.String barcode;
 	final private java.net.URL url;
@@ -33,39 +24,41 @@ public class ProduitApi {
 
 
 
-	ProduitApi(java.lang.String barcode)throws MalformedURLException, IOException { //nécessaire de mettre le "throws " pour ne pas avoir d'erreur sur url
-	this.barcode = barcode;
-	this.url = new java.net.URL("http://world.openfoodfacts.org/api/v0/product/" + this.barcode + ".json");	
-	connection =  url.openConnection();	
-	stream();
-
+	ProduitApi(java.lang.String barcode)throws Exception, MalformedURLException, IOException { //nécessaire de mettre le "throws " pour ne pas avoir d'erreur sur url
+		this.barcode = barcode;
+		this.url = new java.net.URL("http://world.openfoodfacts.org/api/v0/product/" + this.barcode + ".json");	
+		this.connection =  url.openConnection();	
+		if (connection != null) {
+		parseJson();
+		}
+		else{
+			throw new Exception("erreur de connection");
+		}
 
 
 
 	}
-	public void stream() throws IOException{
-		if (connection != null) {
+	public void parseJson() throws IOException{
+			//La connection établie fournit un fichier que nous mettons dans une stream 'response'
+			//L'objet 'parser' est crée pour itérer sur cette stream et rajouter à notre objet 'constructeur_objet'
+			//toutes les informations pertinentes 
 			java.io.InputStreamReader response = new java.io.InputStreamReader(connection.getInputStream());
 			javax.json.stream.JsonParser parser = javax.json.Json.createParser(response);
-			// javax.json.JsonReader reader = Json.createReader(response);
-			// BufferedWriter br = new BufferedWriter(new FileWriter("serveur/serverside/src/main/java/com/gabi/serverside/json/yalpro"));
-			// br.write(reader.read().toString());
-			// br.close();
-			//écrire fichier en mémoire
 			
+			//contrôle si on arrive pas à la fin de la stream
 			while (parser.hasNext()) {
 				
 				String key;
 				String value;
 				javax.json.stream.JsonParser.Event event = parser.next();
-				 if (event == javax.json.stream.JsonParser.Event.KEY_NAME) {//si nous tombons sur un keyname, nous allons chercher lequel c'est pour le mettre dans notre objet
+				 if (event == javax.json.stream.JsonParser.Event.KEY_NAME) {
+				//pour chaque valeur de key, on l'interprete selon sa valeur
+				//puis on rajoute les valeures dans objet et on 'break' le cycle pour re-iterer dans le while
 					switch (parser.getString()){
 						case "code":
 							key = parser.getString();
-							//System.out.print(key);
 							parser.next();
 							value = parser.getString();
-							//System.out.print(value);
 							constructeur_objet.add(key, value);
 							break;
 						case "product_name_fr":
@@ -93,6 +86,10 @@ public class ProduitApi {
 							constructeur_objet.add("nutriscore", value);
 							break;
 						case "selected_images":
+//Dans ce cas particulier, la 'selected_images' contient plusieures valeures non pertinentes
+//On doit donc rentrer dans l'objet de la valeur pour chercher plus en détail jusqu'à trouver
+//l'url de l'image dans la bonne resolution
+
 
 							key = parser.getString();
 							parser.next();
@@ -136,21 +133,12 @@ public class ProduitApi {
 						
 				}
 			}
-			//bufferdInputStream.mark(some_value);
-			//bufferdInputStream.reset();
-			//read it again
-				//java.io.InputStreamReader response_ = new java.io.InputStreamReader(connection.getInputStream());
 
-		}	
+			
 	}
-	public String print()throws IOException{
+	public String build()throws IOException{
 		string_json = constructeur_objet.build().toString();
 		System.out.print(string_json);
-
-		//FileWriter file = new FileWriter("serveur/src/main/java/com/gabi/serveur/json/final.json");
-        //serveur/src/main/java/com/gabi/serveur/json/final.json
-        //file.write(string_json);
-		//file.close();
 		return string_json;
 	}
 
