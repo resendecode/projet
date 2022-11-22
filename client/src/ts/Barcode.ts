@@ -31,7 +31,7 @@ export default class Barcode {
             Quagga.stop();
             console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
             // Envoie le résultat au Websocket
-            ws.send(result);
+            ws.send(result.codeResult.code);
         });
     }
 
@@ -47,8 +47,9 @@ export default class Barcode {
             src: img // or 'data:image/jpg;base64,' + data
         }, function(result : any){
             if(result.codeResult) {
-                console.log("result", result.codeResult.code);
-                ws.send(result);
+                console.log("result", result);
+                // Envoie le résultat au Websocket
+                ws.send(result.codeResult.code);
             } else {
                 alert("non détecté");
             }
