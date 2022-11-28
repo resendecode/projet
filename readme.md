@@ -1,6 +1,4 @@
 TO DO :
-
-CLIENT : 
-- css
-- check si des erreurs peuvent apparaitre 
-- alert quand code barre retourne rien
+Parfois le résultat obtenue est pas bon 
+Ex : marque : 1668058229 
+Fibres alimentaires : 	undefined g 	undefined g
