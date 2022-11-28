@@ -43,6 +43,7 @@ public class Serveur {
             try {
                 ProduitApi produit = new ProduitApi(message);
                 session.getBasicRemote().sendText(produit.build());
+                //produit.write();
             } catch (Exception e) {
                 e.printStackTrace();
             }

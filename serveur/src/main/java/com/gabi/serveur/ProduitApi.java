@@ -10,12 +10,14 @@ import java.net.MalformedURLException;
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
 import java.io.IOException;
+import java.io.StringReader;
 
 public class ProduitApi {
 	private java.lang.String barcode;
 	final private java.net.URL url;
 	private java.net.URLConnection connection;
 	JsonObjectBuilder constructeur_objet = Json.createObjectBuilder();
+	String original;
 	String string_json; 
 
 	ProduitApi(java.lang.String barcode)throws Exception, MalformedURLException, IOException { //nécessaire de mettre le "throws " pour ne pas avoir d'erreur sur url
@@ -29,13 +31,20 @@ public class ProduitApi {
 		else{
 			throw new Exception("erreur de connection");
 		}
+		
 	}
 	public void parseJson() throws IOException{
 			//La connection établie fournit un fichier que nous mettons dans une stream 'response'
 			//L'objet 'parser' est crée pour itérer sur cette stream et rajouter à notre objet 'constructeur_objet'
 			//toutes les informations pertinentes 
 			java.io.InputStreamReader response = new java.io.InputStreamReader(connection.getInputStream());
-			javax.json.stream.JsonParser parser = javax.json.Json.createParser(response);
+
+			//DEBUG
+			javax.json.JsonReader jsonReader = Json.createReader(response);
+			original = jsonReader.readObject().toString();
+			javax.json.stream.JsonParser parser = javax.json.Json.createParser(new StringReader(original));
+
+			//DEBUG	
 			
 			//contrôle si on arrive pas à la fin de la stream
 			while (parser.hasNext()) {
@@ -135,7 +144,12 @@ public class ProduitApi {
 	//être envoyée ensuite par le serveur ws
 	public String build()throws IOException{
 		string_json = constructeur_objet.build().toString();
+		System.out.println(string_json);
 		return string_json;
+	}
+	public void write(){
+		System.out.println(original);
+			
 	}
 
 
