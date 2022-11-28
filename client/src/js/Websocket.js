@@ -10,16 +10,28 @@ ws.onerror = function (error) {
 };
 // Message reçu
 ws.onmessage = function (event) {
+    // met le string 'event' en json
     let json = JSON.parse(event.data);
+    let size = Object.keys(json).length;
+    // Div d'affichage
     let result = document.getElementById("parse");
+    let error = document.getElementById("error");
     console.log(json);
+    // Vérification si le code barre existe ou non
+    if (size == 1) {
+        error.innerHTML = "Le code barre n'existe pas.";
+        return;
+    }
+    // enlève le texte d'erreur si l'ancien code barre ne fonctionnait pas
+    if (error.innerHTML.length != 0)
+        error.innerHTML = "";
     // Affichage
     result.innerHTML =
         `<img src="${json.img}">
     <div class='ptext'>
     <h2>${json.nom}</h2> <br/>
     marque : ${json.marque} <br/>
-    catégorie : ${json.catégories} <br/>
+    catégorie : ${json.categories} <br/>
     nutriscore : ${json.nutriscore} <br/>
     quantité : ${json.qte} <br/>
     ingrédients : ${json.ingredients} <br/>

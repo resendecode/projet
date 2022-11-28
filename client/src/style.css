@@ -50,6 +50,12 @@ canvas.drawing, canvas.drawingBuffer {
     text-decoration-line: underline;
   }
 
+  #error {
+    color: red;
+    display: inline;
+    margin: 1rem;
+  }
+
   #parse {
     display: flex;
     padding: 1rem;
@@ -70,7 +76,6 @@ canvas.drawing, canvas.drawingBuffer {
 
   #parse table {
   margin-bottom: 1rem;
-	width: 90%;
 	border-collapse: collapse;
 	overflow: hidden;
 	box-shadow: 0 0 20px rgba(0,0,0,0.1);

@@ -111,7 +111,7 @@ public class ProduitApi {
 							break;
 					
 					
-						case "categories_old":
+						case "categories":
 							parser.next();
 							constructeur_objet.add("categories", parser.getValue());
 							break;

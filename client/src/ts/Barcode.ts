@@ -61,6 +61,7 @@ export default class Barcode {
     input(value : string) {
         // Le code barre doit être composé de numéro avec une taille de 13
         let regex = new RegExp("^[0-9]{13}$");
-        regex.test(value) ? ws.send(value) : alert("mauvais format");
+        let error = document.getElementById("error");
+        regex.test(value) ? ws.send(value) : error!.innerHTML = "mauvais format du code barre";
     }
 }

@@ -52,7 +52,6 @@ public class Serveur {
         @javax.websocket.OnOpen
         public void onOpen(javax.websocket.Session session, javax.websocket.EndpointConfig ec) throws java.io.IOException {
             System.out.println("OnOpen... " + ec.getUserProperties().get("Author"));
-            session.getBasicRemote().sendText("{\"Handshaking\": \"Yes\"}");
         }
     }
 
