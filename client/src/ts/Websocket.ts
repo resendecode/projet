@@ -36,7 +36,7 @@ ws.onmessage = function(event) {
     <h2>${json.nom}</h2> <br/>
     marque : ${json.marque} <br/>
     catégorie : ${json.categories} <br/>
-    nutriscore : ${json.nutriscore} <br/>
+    nutriscore : ${json.nutriscore.toUpperCase()} <br/>
     quantité : ${json.qte} <br/>
     ingrédients : ${json.ingredients} <br/>
     <table>

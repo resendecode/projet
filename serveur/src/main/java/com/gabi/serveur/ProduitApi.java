@@ -68,12 +68,24 @@ public class ProduitApi {
 							value = parser.getString();
 							constructeur_objet.add("nom", value);
 							break;
+
+						//Dans la clé "owner_fields" on obtient une valeur erronée, donc on l'avance
+						case "owner_fields":
+							System.out.println("balise erronée trouvée");
+							parser.next();
+							parser.skipObject();
+							break;
+						//
+
 						case "brands":
 							key = parser.getString();
 							parser.next();
 							value = parser.getString();
 							constructeur_objet.add("marque", value);
 							break;
+
+						
+
 						case "quantity":
 							key = parser.getString();
 							parser.next();
