@@ -31,7 +31,6 @@ ws.onmessage = function (event) {
     <div class='ptext'>
     <h2>${json.nom}</h2> <br/>
     marque : ${json.marque} <br/>
-    catégorie : ${json.categories} <br/>
     nutriscore : ${json.nutriscore.toUpperCase()} <br/>
     quantité : ${json.qte} <br/>
     ingrédients : ${json.ingredients} <br/>
@@ -43,43 +42,43 @@ ws.onmessage = function (event) {
   </tr>
   <tr>
     <td>Energie</td>
-    <td>${json.nutriment["energy-kcal_100g"]} ${json.nutriment["energy-kcal_unit"]}</td>
-    <td>${json.nutriment["energy-kcal_serving"]} ${json.nutriment["energy-kcal_unit"]}</td>
+    <td>${json.nutriment["energy-kcal_100g"] || "0"} ${json.nutriment["energy-kcal_unit"] || "kcal"}</td>
+    <td>${json.nutriment["energy-kcal_serving"] || "0"} ${json.nutriment["energy-kcal_unit"] || "kcal"}</td>
   </tr>
   <tr>
     <td>Matières grasses</td>
-    <td>${json.nutriment["fat_100g"]} ${json.nutriment["fat_unit"]}</td>
-    <td>${json.nutriment["fat_serving"]} ${json.nutriment["fat_unit"]}</td>
+    <td>${json.nutriment["fat_100g"] || "0"} ${json.nutriment["fat_unit"] || "g"}</td>
+    <td>${json.nutriment["fat_serving"] || "0"} ${json.nutriment["fat_unit"] || "g"}</td>
   </tr>
   <tr>
     <td>Dont acides gras saturés</td>
-    <td>${json.nutriment["saturated-fat_100g"]} ${json.nutriment["saturated-fat_unit"]}</td>
-    <td>${json.nutriment["saturated-fat_serving"]} ${json.nutriment["saturated-fat_unit"]}</td>
+    <td>${json.nutriment["saturated-fat_100g"] || "0"} ${json.nutriment["saturated-fat_unit"] || "g"}</td>
+    <td>${json.nutriment["saturated-fat_serving"] || "0"} ${json.nutriment["saturated-fat_unit"] || "g"}</td>
   </tr>
   <tr>
     <td>Glucides</td>
-    <td>${json.nutriment["carbohydrates_100g"]} ${json.nutriment["carbohydrates_unit"]}</td>
-    <td>${json.nutriment["carbohydrates_serving"]} ${json.nutriment["carbohydrates_unit"]}</td>
+    <td>${json.nutriment["carbohydrates_100g"] || "0"} ${json.nutriment["carbohydrates_unit"] || "g"}</td>
+    <td>${json.nutriment["carbohydrates_serving"] || "0"} ${json.nutriment["carbohydrates_unit"] || "g"}</td>
   </tr>
   <tr>
     <td>Dont sucres</td>
-    <td>${json.nutriment["sugars_100g"]} ${json.nutriment["sugars_unit"]}</td>
-    <td>${json.nutriment["sugars_serving"]} ${json.nutriment["sugars_unit"]}</td>
+    <td>${json.nutriment["sugars_100g"] || "0"} ${json.nutriment["sugars_unit"] || "g"}</td>
+    <td>${json.nutriment["sugars_serving"] || "0"} ${json.nutriment["sugars_unit"] || "g"}</td>
   </tr>
   <tr>
     <td>Fibres alimentaires</td>
-    <td>${json.nutriment["fiber_100g"]} ${json.nutriment["fiber_unit"]}</td>
-    <td>${json.nutriment["fiber_serving"]} ${json.nutriment["fiber_unit"]}</td>
+    <td>${json.nutriment["fiber_100g"] || "0"} ${json.nutriment["fiber_unit"] || "g"}</td>
+    <td>${json.nutriment["fiber_serving"] || "0"} ${json.nutriment["fiber_unit"] || "g"}</td>
   </tr>
   <tr>
     <td>Protéines</td>
-    <td>${json.nutriment["proteins_100g"]} ${json.nutriment["proteins_unit"]}</td>
-    <td>${json.nutriment["proteins_serving"]} ${json.nutriment["proteins_unit"]}</td>
+    <td>${json.nutriment["proteins_100g"] || "0"} ${json.nutriment["proteins_unit"] || "g"}</td>
+    <td>${json.nutriment["proteins_serving"] || "0"} ${json.nutriment["proteins_unit"] || "g"}</td>
   </tr>
   <tr>
     <td>Sel</td>
-    <td>${json.nutriment["salt_100g"]} ${json.nutriment["salt_unit"]}</td>
-    <td>${json.nutriment["salt_serving"]} ${json.nutriment["salt_unit"]}</td>
+    <td>${json.nutriment["salt_100g"] || "0"} ${json.nutriment["salt_unit"] || "g"}</td>
+    <td>${json.nutriment["salt_serving"] || "0"} ${json.nutriment["salt_unit"] || "g"}</td>
   </tr>
 </table>
     </div>`;

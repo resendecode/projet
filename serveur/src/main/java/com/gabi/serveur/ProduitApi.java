@@ -132,10 +132,7 @@ public class ProduitApi {
 							break;
 					
 					
-						case "categories":
-							parser.next();
-							constructeur_objet.add("categories", parser.getValue());
-							break;
+					
 						case "ingredients_text_fr":
 							parser.next();
 							constructeur_objet.add("ingredients", parser.getValue());
