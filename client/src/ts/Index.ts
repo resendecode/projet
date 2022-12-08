@@ -11,7 +11,7 @@ let Reader : Barcode = new Barcode();
 // Event Listener de l'activation de la caméra
 start.addEventListener('click', (() => {
     Reader.live(video);
-})as EventListener);
+}) as EventListener);
 
 // Event Listener d'upload de fichier
 upload.addEventListener('change', function(this : any) {
