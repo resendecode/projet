@@ -1,11 +1,6 @@
 
 package com.gabi.serveur;
 
-/**
- *
- * @author gabriel
- */
-
 import java.net.MalformedURLException;
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
@@ -34,18 +29,14 @@ public class ProduitApi {
 		
 	}
 	public void parseJson() throws IOException{
-			//La connection établie fournit un fichier que nous mettons dans une stream 'response'
-			//L'objet 'parser' est crée pour itérer sur cette stream et rajouter à notre objet 'constructeur_objet'
-			//toutes les informations pertinentes 
+			//La connection établie fournit un flux que nous affectons dans une stream 'response'
+			//L'objet 'parser' est crée pour itérer sur cette stream et construire notre objet 'constructeur_objet'
+			//avec toutes les informations pertinentes 
 			java.io.InputStreamReader response = new java.io.InputStreamReader(connection.getInputStream());
-
-			//DEBUG
 			javax.json.JsonReader jsonReader = Json.createReader(response);
 			original = jsonReader.readObject().toString();
-			javax.json.stream.JsonParser parser = javax.json.Json.createParser(new StringReader(original));
+			javax.json.stream.JsonParser parser = javax.json.Json.createParser(new StringReader(original));		
 
-			//DEBUG	
-			
 			//contrôle si on arrive pas à la fin de la stream
 			while (parser.hasNext()) {
 				
@@ -68,24 +59,17 @@ public class ProduitApi {
 							value = parser.getString();
 							constructeur_objet.add("nom", value);
 							break;
-
 						//Dans la clé "owner_fields" on obtient une valeur erronée, donc on l'avance
 						case "owner_fields":
-							System.out.println("balise erronée trouvée");
 							parser.next();
 							parser.skipObject();
 							break;
-						//
-
 						case "brands":
 							key = parser.getString();
 							parser.next();
 							value = parser.getString();
 							constructeur_objet.add("marque", value);
 							break;
-
-						
-
 						case "quantity":
 							key = parser.getString();
 							parser.next();
@@ -99,11 +83,10 @@ public class ProduitApi {
 							constructeur_objet.add("nutriscore", value);
 							break;
 						case "selected_images":
-//Dans ce cas particulier, la 'selected_images' contient plusieures valeures non pertinentes
+//Dans ce cas particulier, la clé 'selected_images' contient plusieures valeures non pertinentes
 //On doit donc rentrer dans l'objet de la valeur pour chercher plus en détail jusqu'à trouver
 //l'url de l'image dans la bonne resolution
-
-//puisque l'arborescence de l'objet valeur se repete pour plusieures valeures parent
+//puisque l'arborescence de l'objet de la valeur se repete pour plusieures valeures parents
 //exemple : "...display/fr/img"  et "...display/eng/img"
 //il est nécessaire de 'break' le cycle à chaque 'if' pour ne pas retomber sur la mauvaise balise
 
@@ -130,9 +113,6 @@ public class ProduitApi {
 								}
 							}
 							break;
-					
-					
-					
 						case "ingredients_text_fr":
 							parser.next();
 							constructeur_objet.add("ingredients", parser.getValue());
@@ -146,23 +126,15 @@ public class ProduitApi {
 						
 				}
 			}
-
-			
 	}
-	//Cette méthode converti juste l'objet qu'on a obtenu dans 'parseDocument()' vers une string pour qu'elle puisse
+	//Cette méthode converti l'objet qu'on a obtenu dans 'parseDocument()' vers une string pour qu'elle puisse
 	//être envoyée ensuite par le serveur ws
 	public String build()throws IOException{
 		string_json = constructeur_objet.build().toString();
-		System.out.println(string_json);
+		System.out.println(string_json); 
 		return string_json;
 	}
-	public void write(){
-		System.out.println(original);
-			
-	}
-
-
-
+	
 }
 
 

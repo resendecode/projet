@@ -1,4 +1,4 @@
-// Création du WebSocket
+// Création d'une connexion WebSocket
 export var ws = new WebSocket("ws://localhost:8025/BetterFood/websocket");
 // Au démarrage
 ws.onopen = function (e) {

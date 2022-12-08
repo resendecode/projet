@@ -1,17 +1,5 @@
-
 package com.gabi.serveur;
-
 import org.glassfish.tyrus.server.Server;
-
-/**
- *
- * @author gabriel
- */
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
- */
 
 
 public class Serveur {
@@ -34,16 +22,15 @@ public class Serveur {
         @javax.websocket.OnMessage
         public void onMessage(javax.websocket.Session session, String message) {
             //lorsqu'on reçoit un message du côté client de l'application (un barcode)
-            //nous essayons de créer un objet ProduitApi qui va traiter la requete
-            //la reponse au message sera une chaine de caracteres retourné par la methode 'build'
-            //avec toutes les informations necessaires au côté client pour construire la page de réponse
+            //nous essayons de créer un objet ProduitApi qui va traiter la requête
+            //la réponse au message sera une chaîne de caractères retourné par la methode 'build()'
+            //avec toutes les informations necessaires pour côté client pour construire la page de réponse.
             System.out.println("Message from client: " + message);
 
             //Creation du produit avec le code barre du client
             try {
                 ProduitApi produit = new ProduitApi(message);
                 session.getBasicRemote().sendText(produit.build());
-                //produit.write();
             } catch (Exception e) {
                 e.printStackTrace();
             }

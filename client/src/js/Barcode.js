@@ -7,12 +7,11 @@ export default class Barcode {
             inputStream: {
                 name: "Live",
                 type: "LiveStream",
-                // Or '#yourElement' (optional)
                 target: video
             },
             decoder: {
                 readers: [
-                    "ean_reader",
+                    "ean_reader", // type de code barre qu'on traite
                 ],
             }
         }, function (err) {
@@ -35,19 +34,20 @@ export default class Barcode {
         Quagga.decodeSingle({
             decoder: {
                 readers: [
-                    "ean_reader",
-                ], // List of active readers
+                    "ean_reader", // type de code barre qu'on traite
+                ],
             },
             locate: true,
-            src: img // or 'data:image/jpg;base64,' + data
+            src: img
         }, function (result) {
-            if (result.codeResult) {
+            if (result) {
                 console.log("result", result);
                 // Envoie le résultat au Websocket
                 ws.send(result.codeResult.code);
             }
             else {
-                alert("non détecté");
+                let error = document.getElementById("error");
+                error.innerHTML = "code barre introuvable";
             }
         });
     }
